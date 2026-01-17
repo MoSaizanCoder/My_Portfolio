@@ -1,71 +1,93 @@
 /* ----------------- CSS Variables / Color Palette ----------------- */
 :root {
-    --bg-color: #080808;           /* Main Background */
-    --bg-secondary: #262626;       /* Inputs and Footer Background */
-    --text-main: #fff;             /* White Text */
-    --text-secondary: #ababab;     /* Gray/Muted Text */
-    --primary-color: #ff004f;      /* Pink/Red Highlight */
-    --accent-color: #b54769;       /* Tab Content Span Color */
-    --success-color: #61b752;      /* Success Messages */
-    --overlay-color: rgba(0,0,0,0.6); /* Image Overlays */
+    /* 1. Backgrounds */
+    --bg-color: #ffffff;           /* Main Background */
+    --bg-secondary: #f3f4f6;       /* Inputs/Cards */
+
+    /* 2. Text */
+    --text-main: #111827;          /* Deep Charcoal */
+    --text-secondary: #4b5563;     /* Medium Gray */
+
+    /* 3. Accents (Indigo Theme) */
+    --primary-color: #4f46e5;      
+    --accent-color: #4338ca;       /* Darker Indigo for Hover */
+    --text-highlight: #f00048;     /* Red/Pink for special highlights */
+    
+    /* 4. Feedback & Overlay */
+    --success-color: #16a34a;      
+    --overlay-color: rgba(255, 255, 255, 0.90); 
 }
 
 /* ----------------- Global Styles ----------------- */
-*{
+* {
     margin: 0;
     padding: 0;
     font-family: 'Poppins', sans-serif;
     box-sizing: border-box;
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
-body{
+body {
     background: var(--bg-color);
     color: var(--text-main);
 }
 
-#header{
-    width: 100%;
-    height: 65vh;
-}
-
-.container{
+.container {
     padding: 10px 10%;
 }
 
-/* ----------------- Navigation ----------------- */
-nav{
+/* ----------------- Navigation (Fixed/Sticky) ----------------- */
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers the inner container */
+    flex-wrap: wrap;
+    
+    /* FIXING IT TO THE TOP */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Highest priority: Stays above everything */
+    
+    /* GLASS EFFECT */
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Blurs content behind it */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Subtle shadow */
+    transition: 0.3s;
+}
+
+/* This ensures the logo and menu align with your page content width */
+.nav-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    flex-wrap: wrap;
+    width: 100%;
+    padding: 15px 10%; /* Matches your global container padding */
 }
 
-nav h1 span{
+nav h1 span {
     color: var(--primary-color);
 }
 
-.logo{
-    width: 200px;
-}
-
-nav ul li{
+nav ul li {
     display: inline-block;
     list-style: none;
     margin: 10px 20px;
 }
 
-nav ul li a{
+nav ul li a {
     color: var(--text-main);
     text-decoration: none;
     font-size: 18px;
     position: relative;
+    font-weight: 500;
 }
 
-nav ul li a::after{
+nav ul li a::after {
     content: '';
     width: 0;
     height: 3px;
@@ -73,74 +95,132 @@ nav ul li a::after{
     position: absolute;
     left: 0;
     bottom: -6px;
-    transition: 0.5s;
+    transition: 0.3s;
 }
 
-nav ul li a:hover::after{
+nav ul li a:hover::after {
     width: 100%;
 }
 
-/* ----------------- About Section ----------------- */
-.header-text{
-    margin-top: 20%;
+/* ----------------- Header (Parallax Logic) ----------------- */
+#header {
+    width: 100%;
+    height: 100vh; 
+    background-size: cover;
+    background-position: center;
+    
+    /* --- PARALLAX FIX START --- */
+    position: fixed; /* Pins header to the background */
+    top: 0;
+    left: 0;
+    z-index: 1; /* Lower priority: stays behind other content */
+    /* --- PARALLAX FIX END --- */
+}
+
+#header .container {
+    height: 100%; /* Ensures container fills the fixed header */
+    padding-top: 80px; /* Pushes content down so it's not hidden behind Nav */
+}
+
+/* ----------------- Intro Text (Centered) ----------------- */
+.header-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 70%; 
     font-size: 20px;
 }
 
-.header-text h1{
+.header-text h1 {
     font-size: 60px;
     margin-top: 20px;
-}
-.header-text h1 span{
-    color: var(--primary-color);
+    color: var(--text-main);
+    line-height: 1.2;
 }
 
-#about{
+.header-text h1 span {
+    color: var(--primary-color);
+    display: inline-block;
+    transition: transform 0.3s;
+}
+
+.header-text h1 span:hover {
+    transform: translateY(-5px);
+}
+
+/* ----------------- About Section (The Slide-Over Layer) ----------------- */
+#about {
     padding: 80px 0;
     color: var(--text-secondary);
+    
+    /* --- PARALLAX FIX START --- */
+    margin-top: 100vh; /* Pushes About section below the fixed header */
+    position: relative; /* Brings it back into layout flow */
+    z-index: 2; /* Higher priority: Slides OVER the header */
+    background: var(--bg-color); /* Solid background so header doesn't show through */
+    box-shadow: 0 -10px 25px rgba(0,0,0,0.05); /* Optional shadow for depth */
+    /* --- PARALLAX FIX END --- */
 }
 
-.row{
+.row {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
 }
 
-.about-col-1{
+.about-col-1 {
     flex-basis: 35%;
 }
 
-.about-col-1 img{
-    width: 95%;
+.about-col-1 img {
+    width: 100%;
     border-radius: 15px;
+    display: block;
+    transition: transform 0.5s;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2); 
+    border: 4px solid var(--primary-color);
 }
 
-.about-col-2{
+.about-col-1 img:hover {
+    transform: translateY(-10px);
+}
+
+.about-col-2 {
     flex-basis: 60%;
 }
-.about-col-2 p span{
-    color: var(--accent-color);
-    font-size: 22px;
-}
-.Sub-title{
+
+.Sub-title {
     font-size: 60px;
     font-weight: 600;
     color: var(--text-main);
+    margin-bottom: 20px;
 }
 
-.tab-title{
+.about-col-2 p {
+    line-height: 1.6; 
+}
+
+.about-col-2 p span {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+/* ----------------- Tabs ----------------- */
+.tab-title {
     display: flex;
     margin: 20px 0 40px;
 }
 
-.tab-links{
-    margin: 50px;
+.tab-links {
+    margin-right: 50px;
     font-size: 18px;
     font-weight: 500;
     cursor: pointer;
     position: relative;
+    color: var(--text-secondary);
 }
 
-.tab-links::after{
+.tab-links::after {
     content: '';
     width: 0;
     height: 3px;
@@ -151,58 +231,82 @@ nav ul li a:hover::after{
     transition: 0.5s;
 }
 
-.tab-links.active-link::after{
-    width: 60%;
+.tab-links.active-link {
+    color: var(--primary-color);
 }
 
-.tab-contents ul li{
+.tab-links.active-link::after {
+    width: 70%;
+}
+
+.tab-contents ul li {
     list-style: none;
-    margin: 10px 0;
+    margin: 15px 0;
+    line-height: 1.5;
 }
 
-.tab-contents ul li span{
-    color: var(--accent-color);
-    font-size: 20px;
+.tab-contents ul li span {
+    color: var(--primary-color);
+    font-size: 18px;
+    font-weight: 600;
 }
 
-.tab-contents{
+.tab-contents {
     display: none;
+    min-height: 450px; 
 }
 
-.tab-contents.active-tab{
+.tab-contents.active-tab {
     display: block;
+    animation: fadeIn 0.5s ease; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* ----------------- My Work / Portfolio ----------------- */
-#portfolio{
+/* Ensure these sections stay ON TOP of the fixed header */
+#portfolio, #contact, .copyright {
+    position: relative;
+    z-index: 2;
+    background: var(--bg-color);
+}
+
+#portfolio {
     padding: 50px 0;
 }
 
-.work-list{
+.work-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     grid-gap: 40px;
     margin-top: 50px;
 }
 
-.work{
+.work {
     border-radius: 10px;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); 
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
 }
 
-.work img{
+.work img {
     width: 100%;
+    height: 100%; 
+    object-fit: cover;
     border-radius: 10px;
     display: block;
     transition: transform 0.5s;
 }
 
-.layer{
+.layer {
     width: 100%;
     height: 0;
-    /* Updated gradient to use variables */
-    background: linear-gradient(var(--overlay-color), var(--primary-color));
+    background: linear-gradient(rgba(255, 255, 255, 0.1), var(--primary-color));
     border-radius: 10px;
     position: absolute;
     left: 0;
@@ -212,42 +316,54 @@ nav ul li a:hover::after{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 0 40px;
+    padding: 0 30px;
     text-align: center;
     transition: height 0.5s;
 }
 
-.layer h3{
-    font-weight: 500;
-    margin-bottom: 20px;
+.layer h3 {
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #fff; 
 }
 
-.layer p{
+.layer p {
     font-size: 14px;
+    color: #f3f4f6;
+    margin-bottom: 15px;
 }
 
-.layer a{
-    margin-top: 20px;
+.layer p span {
+    color: #fff; 
+    font-weight: bold;
+}
+
+.layer a {
     color: var(--primary-color);
-    text-decoration: none;
-    font-size: 18px;
-    line-height: 60px;
-    background: var(--text-main);
-    width: 60px;
-    height: 60px;
+    background: #fff;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
     border-radius: 50%;
     text-align: center;
+    font-size: 18px;
+    transition: 0.3s;
 }
 
-.work:hover img{
+.layer a:hover {
     transform: scale(1.1);
 }
 
-.work:hover .layer{
+.work:hover img {
+    transform: scale(1.1);
+}
+
+.work:hover .layer {
     height: 100%;
 }
 
-.btn{
+/* ----------------- Buttons ----------------- */
+.btn {
     display: block;
     margin: 50px auto;
     width: fit-content;
@@ -256,37 +372,52 @@ nav ul li a:hover::after{
     border-radius: 6px;
     text-decoration: none;
     color: var(--text-main);
-    transition: background 0.5s;
+    transition: background 0.5s, color 0.5s;
 }
 
-.btn:hover{
+.btn:hover {
     background: var(--primary-color);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(79, 70, 229, 0.4);
+}
+
+.btn.btn2 {
+    display: inline-block;
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.btn.btn2:hover {
+    background: var(--accent-color);
 }
 
 /* ----------------- Contact ----------------- */
-.contact-left{
+.contact-left {
     flex-basis: 35%;
 }
 
-.contact-right{
+.contact-right {
     flex-basis: 60%;
 }
 
-.contact-left p{
+.contact-left p {
     margin-top: 30px;
 }
 
-.contact-left p i{
+.contact-left p i {
     color: var(--primary-color);
     margin-right: 15px;
     font-size: 25px;
 }
 
-.social-icon{
+.social-icon {
     margin-top: 30px;
 }
 
-.social-icon a{
+.social-icon a {
     text-decoration: none;
     font-size: 30px;
     margin-right: 15px;
@@ -295,23 +426,18 @@ nav ul li a:hover::after{
     transition: transform 0.5s;
 }
 
-.social-icon a:hover{
+.social-icon a:hover {
     color: var(--primary-color);
     transform: translateY(-5px);
 }
 
-.btn.btn2{
-    display: inline-block;
-    background: var(--primary-color);
-}
-
-.contact-right form{
+.contact-right form {
     width: 100%;
 }
 
-form input{
-    border: 0;
+form input, form textarea {
     width: 100%;
+    border: 1px solid #ddd; 
     outline: none;
     background: var(--bg-secondary);
     padding: 15px;
@@ -319,108 +445,215 @@ form input{
     color: var(--text-main);
     font-size: 18px;
     border-radius: 6px;
+    transition: 0.3s;
 }
 
-form textarea{
-    border: 0;
-    width: 100%;
-    outline: none;
-    background: var(--bg-secondary);
-    padding: 15px;
-    margin: 15px 0;
-    color: var(--text-main);
-    font-size: 18px;
-    border-radius: 6px;
+form input:focus, form textarea:focus {
+    border-color: var(--primary-color);
+    background: #fff;
+    box-shadow: 0 0 8px rgba(79, 70, 229, 0.1);
 }
 
-form .btn2{
-    padding: 14px 60px;
-    font-size: 18px;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-.copyright{
+.copyright {
     width: 100%;
     text-align: center;
     padding: 25px 0;
     background: var(--bg-secondary);
     font-weight: 300;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
-/* ----------------- CSS for Small Screen ----------------- */
-nav .fa-solid{
+/* ----------------- Mobile CSS (Final Responsive Parallax) ----------------- */
+nav .fa-solid {
     display: none;
 }
 
-@media only screen and (max-width: 610px){
-    .header-text{
-        margin-top: 40%;
-        font-size: 14px;
-    }
-    .header-text h1{
-        font-size: 25px;
-    }
+@media only screen and (max-width: 680px) {
     
-    /* --- Hamburger (Open) Icon Changes --- */
-    nav .fa-solid{
-        display: block;
-        font-size: 25px;
-        position: fixed;      /* Makes it float relative to the screen */
-        right: 25px;          /* Positions it to the right */
-        top: 25px;            /* Positions it from the top */
-        z-index: 10;          /* Ensures it stays above images/text */
-        cursor: pointer;
-        color: var(--text-main); /* Ensures it uses your variable color */
-        
-        /* Optional: Add a text shadow or background so it's visible on white images */
-        text-shadow: 0px 0px 10px rgba(0,0,0,0.8); 
+    /* 0. GLOBAL SAFETY FIX */
+    html, body {
+        overflow-x: hidden; /* Prevents horizontal scrolling */
+        width: 100%;
+        position: relative;
     }
 
-    nav ul{
-        background: var(--primary-color);
+    /* 1. FIXED HEADER (The Bottom Layer) */
+    #header {
+        position: fixed; 
+        top: 0;
+        left: 0;
+        
+        /* FIX: Use Viewport Width & Hide Overflow */
+        width: 100vw; 
+        max-width: 100%;
+        height: 100vh;
+        overflow: hidden; 
+        
+        /* z-index 1: Sits at the back */
+        z-index: 1; 
+        
+        background: #ffffff; 
+        padding-bottom: 50px;
+        
+        /* Flexbox to keep text centered */
+        display: flex;
+        align-items: center; 
+        justify-content: center;
+    }
+
+    /* 2. SCROLLING SECTIONS (The Top Layer) */
+    #about, #portfolio, #contact, .copyright {
+        position: relative;
+        z-index: 100; 
+        background-color: #ffffff !important; /* Force Solid White */
+        width: 100%; 
+    }
+
+    /* 3. PARALLAX MARGIN */
+    #about {
+        margin-top: 100vh; 
+        padding-top: 80px;
+        border-top: 1px solid #ffffff; 
+    }
+    
+    /* 4. FLUID HEADER TEXT */
+    .header-text {
+        margin-top: 0;
+        padding: 0 15px;
+        text-align: center;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .header-text h1 {
+        font-size: clamp(24px, 8vw, 35px);
+        line-height: 1.3;
+        word-wrap: break-word;
+    }
+
+    .header-text h1 span {
+        display: inline-block;
+    }
+
+    .header-text p {
+        font-size: clamp(14px, 4vw, 16px);
+        margin-top: 10px;
+    }
+
+    /* 5. FIX PROFILE IMAGE TRANSPARENCY */
+    .about-col-1 {
+        background-color: #ffffff;
+        position: relative;
+        z-index: 101;
+        margin-bottom: 30px;
+    }
+    
+    /* Ensure image fits container */
+    .about-col-1 img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+    }
+
+    /* 6. MOBILE NAVIGATION */
+    .nav-container {
+        padding: 15px 5%; 
+        background: rgba(255, 255, 255, 0.95);
+        z-index: 1000;
+    }
+    
+    nav .fa-bars {
+        display: block;
+        font-size: 25px;
+        color: #111827;
+        cursor: pointer;
+    }
+
+    nav ul {
+        background: #4f46e5;
         position: fixed;
         top: 0;
-        right: -200px;
+        right: -200px; 
         width: 200px;
         height: 100vh;
         padding-top: 50px;
-        z-index: 20;          /* Increased z-index so the menu covers the open button */
+        z-index: 2000; 
         transition: right 0.5s;
+        display: block; 
     }
     
-    nav ul li{
+    nav ul li {
         display: block;
         margin: 25px;
     }
     
-    /* --- Close (X) Icon Changes --- */
-    nav ul .fa-solid{
-        position: absolute;   /* Keeps this absolute relative to the menu, not the screen */
-        top: 25px;
-        left: 25px;
-        cursor: pointer;
-        color: var(--text-main);
+    nav ul li a {
+        color: #fff; 
     }
     
-    .Sub-title{
-        font-size: 40px;
+    nav ul .fa-circle-xmark {
+        display: block;
+        position: absolute;
+        top: 25px;
+        left: 25px;
+        font-size: 25px;
+        color: #fff;
+        cursor: pointer;
     }
-    .about-col-1, .about-col-2{
-        flex-basis: 65%;
+    
+    /* 7. GENERAL LAYOUT & TITLES */
+    .container {
+        padding: 10px 5%; /* Less padding on small screens */
+        width: 100%;
+        overflow: hidden;
     }
-    .about-col-1{
-        margin-bottom: 30px;
+
+    .Sub-title {
+        /* Fluid Font: shrink automatically */
+        font-size: clamp(35px, 10vw, 50px);
+        margin-bottom: 20px;
+        line-height: 1.2;
     }
-    .about-col-2{
-        font-size: 14px;
+    
+    /* 8. CONTENT & TEXT FIXES */
+    .about-col-2 p, 
+    .tab-contents ul li, 
+    .contact-left p {
+        font-size: 15px;
+        line-height: 1.6;
+        width: 100%;
+        box-sizing: border-box; /* Prevents padding from breaking width */
     }
-    .tab-links{
+
+    .about-col-1, .about-col-2, .contact-left, .contact-right {
+        flex-basis: 100%; /* Force full width stacking */
+    }
+
+    /* 9. TABS WRAPPING (Skills, etc.) */
+    .tab-titles {
+        display: flex;
+        flex-wrap: wrap; 
+        gap: 10px;
+    }
+    
+    .tab-links {
+        margin: 0 15px 10px 0;
         font-size: 16px;
-        margin: 40px 20px 30px;
     }
-    .contact-left, .contact-right{
-        flex-basis: 100%;
+
+    /* 10. PROJECTS GRID FIX */
+    .work-list {
+        grid-template-columns: 1fr; /* Single column */
+        gap: 30px;
+    }
+
+    /* 11. FORM FIXES */
+    form input, form textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .copyright {
+        font-size: 14px;
     }
 }
