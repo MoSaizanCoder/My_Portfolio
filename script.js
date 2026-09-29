@@ -1,111 +1,169 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // --- Tab Navigation Logic ---
-  const tablinks = document.querySelectorAll(".tab-links");
-  const tabcontents = document.querySelectorAll(".tab-contents");
+const theme = getComputedStyle(document.documentElement);
+const particlePalette = [
+    theme.getPropertyValue("--accent-purple").trim(),
+    theme.getPropertyValue("--accent-cyan").trim(),
+    theme.getPropertyValue("--color-white").trim()
+];
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const isCompactViewport = window.matchMedia("(max-width: 760px)").matches;
 
-  window.opentab = function (tabname, event) {
-    tablinks.forEach(tablink => tablink.classList.remove("active-link"));
-    tabcontents.forEach(tabcontent => tabcontent.classList.remove("active-tab"));
+function initializeParticleBackground() {
+    const particleScript = document.createElement("script");
+    particleScript.src = "https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js";
+    particleScript.async = true;
+    particleScript.addEventListener("load", () => {
+        const particleEngine = window.tsParticles;
+        if (!particleEngine) {
+            return;
+        }
 
-    if (event && event.currentTarget) {
-      event.currentTarget.classList.add("active-link");
-    }
-    
-    const targetTab = document.getElementById(tabname);
-    if (targetTab) {
-      targetTab.classList.add("active-tab");
-    }
-  };
-
-  // --- Side Menu Logic ---
-  const sidemenu = document.getElementById("sidemenu");
-
-  window.openmenu = function () {
-    if (sidemenu) sidemenu.style.right = "0";
-  };
-
-  window.closemenu = function () {
-    if (sidemenu) sidemenu.style.right = "-200px";
-  };
-
-  // --- Resume Dropdown Click Logic ---
-  const resumeDropdown = document.getElementById("resumeDropdown");
-  const dropdownToggle = document.getElementById("dropdownToggle");
-
-  if (resumeDropdown && dropdownToggle) {
-    // Toggle dropdown open/close
-    dropdownToggle.addEventListener("click", (e) => {
-      e.stopPropagation();
-      resumeDropdown.classList.toggle("active");
-      const isExpanded = resumeDropdown.classList.contains("active");
-      dropdownToggle.setAttribute("aria-expanded", isExpanded);
+        particleEngine.load("tsparticles", {
+            fpsLimit: isCompactViewport ? 45 : 60,
+            background: {
+                color: theme.getPropertyValue("--bg-color").trim()
+            },
+            interactivity: {
+                events: {
+                    onHover: {
+                        enable: !isCompactViewport,
+                        mode: "grab"
+                    },
+                    onClick: {
+                        enable: true,
+                        mode: "push"
+                    },
+                    resize: true
+                },
+                modes: {
+                    grab: {
+                        distance: 140,
+                        links: {
+                            opacity: 0.5
+                        }
+                    },
+                    push: {
+                        quantity: 4
+                    }
+                }
+            },
+            particles: {
+                color: {
+                    value: particlePalette
+                },
+                links: {
+                    color: particlePalette,
+                    distance: 120,
+                    enable: true,
+                    opacity: 0.7,
+                    width: 1.5
+                },
+                move: {
+                    direction: "none",
+                    enable: true,
+                    outModes: {
+                        default: "bounce"
+                    },
+                    random: false,
+                    speed: 1.2,
+                    straight: false
+                },
+                number: {
+                    density: {
+                        enable: true,
+                        area: 800
+                    },
+                    value: isCompactViewport ? 50 : 80
+                },
+                opacity: {
+                    value: 0.8
+                },
+                shape: {
+                    type: "circle"
+                },
+                size: {
+                    value: { min: 1.5, max: 4 }
+                }
+            },
+            detectRetina: true
+        }).catch(error => console.error("Particle background failed to initialize.", error));
     });
+    document.head.append(particleScript);
+}
 
-    // Close when clicking outside
-    document.addEventListener("click", (e) => {
-      if (!resumeDropdown.contains(e.target)) {
-        resumeDropdown.classList.remove("active");
-        dropdownToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-
-    // Close when an option is selected
-    resumeDropdown.querySelectorAll(".dropdown-menu a").forEach((link) => {
-      link.addEventListener("click", () => {
-        resumeDropdown.classList.remove("active");
-        dropdownToggle.setAttribute("aria-expanded", "false");
-      });
-    });
-  }
-
-  // --- Google Sheets Contact Form Submission ---
-  const scriptURL = 'https://script.google.com/macros/s/AKfycby2YNw6KEAS5P_SVnOGablebLk66v8gKYntdHuDx2IiUv0NO9Lg8z0GF7Im6YkATdyp/exec';
-  const form = document.forms['submit-to-google-sheet'];
-  const msg = document.getElementById("msg");
-
-  if (form) {
-    const submitBtn = form.querySelector('button[type="submit"]');
-
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-
-      // Prevent duplicate submissions and provide feedback
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Sending...";
-      }
-
-      try {
-        const response = await fetch(scriptURL, {
-          method: "POST",
-          body: new FormData(form),
-        });
-
-        if (response.ok) {
-          if (msg) {
-            msg.textContent = "Thank you for your message. I will get back to you soon.";
-            setTimeout(() => {
-              msg.textContent = "";
-            }, 5000);
-          }
-          form.reset();
+if (!prefersReducedMotion) {
+    const scheduleParticleBackground = () => {
+        if ("requestIdleCallback" in window) {
+            window.requestIdleCallback(initializeParticleBackground, { timeout: 2000 });
         } else {
-          throw new Error("Form submission returned an error status.");
+            window.setTimeout(initializeParticleBackground, 1200);
         }
-      } catch (error) {
-        console.error("Submission Error:", error.message);
-        if (msg) {
-          msg.textContent = "Something went wrong. Please try again later.";
-          setTimeout(() => {
-            msg.textContent = "";
-          }, 5000);
+    };
+
+    window.requestAnimationFrame(() => window.requestAnimationFrame(scheduleParticleBackground));
+}
+
+const navLinks = document.querySelectorAll('.nav-links a');
+
+// Smooth scrolling for section links; placeholder links remain inert.
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', event => {
+        const target = document.getElementById(anchor.hash.slice(1));
+        if (!target) {
+            event.preventDefault();
+            return;
         }
-      } finally {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerText = "Submit";
+
+        event.preventDefault();
+        if (anchor.matches('.nav-links a')) {
+            navLinks.forEach(link => link.classList.toggle('active', link === anchor));
         }
-      }
+        target.scrollIntoView({
+            behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        });
     });
-  }
 });
+
+const contactForm = document.querySelector(".contact-form");
+const contactStatus = document.querySelector("#contact-status");
+
+if (contactForm) {
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const idleButtonMarkup = submitButton?.innerHTML ?? "";
+
+    contactForm.addEventListener("submit", async event => {
+        event.preventDefault();
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = "Sending your message...";
+        }
+        if (contactStatus) {
+            contactStatus.textContent = "";
+        }
+
+        try {
+            const response = await fetch(contactForm.action, {
+                method: "POST",
+                body: new FormData(contactForm)
+            });
+
+            if (!response.ok) {
+                throw new Error("Contact form submission failed.");
+            }
+
+            contactForm.reset();
+            if (contactStatus) {
+                contactStatus.textContent = "Thank you. Your message has been sent.";
+            }
+        } catch (error) {
+            console.error("Contact form submission failed.", error);
+            if (contactStatus) {
+                contactStatus.textContent = "We could not send your message. Please try again later.";
+            }
+        } finally {
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.innerHTML = idleButtonMarkup;
+            }
+        }
+    });
+}

@@ -3,202 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saizan-Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Mohammad Saizan Ansari | Portfolio</title>
+    <meta name="description" content="Mohammad Saizan Ansari is a 2025 Artificial Intelligence and Data Science graduate with project experience in analytics, machine learning, and Python development.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="script.js" defer></script>
 </head>
 <body>
+    <!-- Background Particles Container -->
+    <div id="tsparticles"></div>
+
+    <!-- Navigation -->
     <nav>
-        <div class="container nav-container"> <h1><span>M</span>o<span>S</span>aizan</h1>
-            <ul id="sidemenu">
-                <li><a href="#header">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <i class="fa-solid fa-circle-xmark" onclick="closemenu()"></i>
-            </ul>
-            <i class="fa-solid fa-bars" onclick="openmenu()"></i>
-        </div>
+        <div class="logo">SAIZAN <span>ANSARI</span></div>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </nav>
 
-    <div id="header">
-        <div class="container">
-            <div class="header-text">
-                <h1>Hi, I'm <span>Saizan</span><br> Ansari from <span>Singrauli</span></h1>
-                <p>A Recent B.Tech Graduate in Artificial Intelligence and Data Science (2025).</p>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>MOHAMMAD SAIZAN ANSARI</h1>
+            <h2>Artificial Intelligence & Data Science Graduate</h2>
+            <p>2025 B.Tech graduate focused on turning complex data into clear, actionable insights.</p>
+            <div class="hero-tags">
+                <span><i class="fa-solid fa-chart-line"></i> Analytics & Visualization</span>
+                <span><i class="fa-solid fa-code"></i> Python & SQL</span>
+                <span><i class="fa-solid fa-brain"></i> Applied Machine Learning</span>
+            </div>
+            <div class="hero-actions">
+                <a class="hero-project-link" href="#projects">View Projects <i class="fa-solid fa-arrow-down" aria-hidden="true"></i></a>
+                <details class="resume-menu">
+                    <summary class="resume-toggle">
+                        <i class="fa-solid fa-download" aria-hidden="true"></i>
+                        Download Resume
+                        <i class="fa-solid fa-chevron-down resume-chevron" aria-hidden="true"></i>
+                    </summary>
+                    <div class="resume-grid">
+                        <a href="assets/resumes/Saizan_Resume.pdf" download>Data Analytics Resume</a>
+                        <a href="assets/resumes/Saizan_Resume_ML.pdf" download>AI & Machine Learning Resume</a>
+                        <a href="assets/resumes/Saizan_Resume_NLP.pdf" download>Data Science Resume</a>
+                        <a href="assets/resumes/Saizan_Resume_Python.pdf" download>Python Developer Resume</a>
+                    </div>
+                </details>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="about">
-        <div class="container">
-            <div class="row">
-                <div class="about-col-1">
-                    <img src="Images/Image 1.jpeg" alt="Saizan Ansari Profile">
-                </div>
-                <div class="about-col-2">
-                    <h1 class="Sub-title">About Me</h1>
-                    <p>I am <span>Mohammad Saizan Ansari</span>, a recent B.Tech graduate in <span>Artificial Intelligence and Data Science</span> (2025). Passionate About Turning Raw Data into Actionable Insights, I have hands-on experience with <span>Python, SQL, and Data Analysis.</span> <br> My portfolio includes projects such as an <span>Exploratory Data Analysis (EDA)</span> on <span>Amazon Prime Video</span> datasets and Designing complex <span>Database Schemas</span> for Food Delivery Platforms like <span>Zomato</span>.</p>
-                    
-                    <div class="tab-title">
-                        <p class="tab-links active-link" onclick="opentab('Skills')">Skills</p>
-                        <p class="tab-links" onclick="opentab('Projects')">Projects</p>
-                        <p class="tab-links" onclick="opentab('Education')">Education</p>
-                        <p class="tab-links" onclick="opentab('Experience')">Experience</p>
-                    </div>
-                    
-                    <div class="tab-contents active-tab" id="Skills">
-                        <ul>
-                            <li><span>Data Analytics & Visualization</span><br>Transforming raw data into insights using Pandas, Matplotlib, and Seaborn (e.g., Amazon Prime EDA).</li>
-                            <li><span>Database Management (SQL)</span><br>Designing efficient schemas and writing complex queries for data extraction (e.g., Zomato DB Design).</li>
-                            <li><span>Machine Learning</span><br>Building predictive models and performing statistical analysis for business intelligence.</li>
-                            <li><span>Python for Data Science</span><br>Advanced data manipulation, cleaning, and scripting for automation.</li>
-                            <li><span>Dashboard Development</span><br>Creating interactive data dashboards and reporting tools using Web Technologies.</li>
-                        </ul>
-                    </div>
-
-                    <div class="tab-contents" id="Projects">
-                        <ul>
-                            <li><span>Exploratory Data Analysis (EDA)</span><br>
-                                <strong style="color:var(--accent-color)">Tech Stack: Python, Pandas, Seaborn</strong><br>
-                                Analyzed the Amazon Prime Video dataset to uncover content trends, rating distributions, and genre popularity for strategic insights.
-                            </li>
-                            <li><span>Relational Database Design</span><br>
-                                <strong style="color:var(--accent-color)">Tech Stack: SQL, ER Diagrams, Normalization</strong><br>
-                                Engineered a complex database schema for a Zomato-like food delivery platform, optimizing tables for order tracking and user management.
-                            </li>
-                            <li><span>Credit Card Fraud Detection</span><br>
-                                <strong style="color:var(--accent-color)">Tech Stack: Machine Learning, Scikit-Learn</strong><br>
-                                Built a predictive model using Logistic Regression to identify fraudulent transactions with high precision, enhancing financial security.
-                            </li>
-                            <li><span>CodeStorm Challenge</span><br>
-                                <strong style="color:var(--accent-color)">Focus: Data Structures & Algorithms (Python)</strong><br>
-                                Competed in a high-intensity coding challenge, solving complex algorithmic problems and optimizing logic for efficiency and speed.
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="tab-contents" id="Education">
-                        <ul>
-                            <li><span>2021 - 2025</span><br>
-                                <strong>B.Tech in Artificial Intelligence & Data Science</strong><br>
-                                Shri Ram Group of Institutions (RGPV), Jabalpur
-                            </li>
-                            <li><span>2020 - 2021</span><br>
-                                <strong>Higher Secondary (Class XII)</strong><br>
-                                Adarsh Ganga Hr. Sec. School, Singrauli
-                            </li>
-                            <li><span>2018 - 2019</span><br>
-                                <strong>Secondary School (Class X)</strong><br>
-                                Adarsh Ganga Hr. Sec. School, Singrauli
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="tab-contents" id="Experience">
-                        <ul>
-                            <li><span>2025 - Present</span><br>
-                                <strong>Data Science Certification Course</strong><br>
-                                AlmaBetter (Specialization in Machine Learning & Analytics)
-                            </li>
-                            <li><span>2024 - 2025</span><br>
-                                <strong>Career Essentials in Data Analysis</strong><br>
-                                Microsoft & LinkedIn
-                            </li>
-                            <li><span>2024</span><br>
-                                <strong>CyberSecurity Basics Certification</strong><br>
-                                Cisco Networking Academy
-                            </li>
-                            <li><span>2023</span><br>
-                                <strong>AWS & Linux Training</strong><br>
-                                Agis I-NET, Jabalpur
-                            </li>
-                        </ul>
-                    </div>
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-container">
+            <div class="about-image">
+                <div class="about-avatar" aria-label="Profile initials: MSA">MSA</div>
+            </div>
+            <div class="about-text">
+                <h3>Building Insightful Data Applications</h3>
+                <p>I am a 2025 B.Tech graduate in Artificial Intelligence and Data Science with hands-on project experience in analytics, machine learning, and Python development. I use SQL and data visualization to make complex information easier to understand.</p>
+                <p>My portfolio spans streaming and retail analytics, fraud detection, AI-assisted problem solving, and relational database design.</p>
+                <div class="about-badges">
+                    <div class="badge"><i class="fa-solid fa-chart-column"></i> Analytics & Visualization</div>
+                    <div class="badge"><i class="fa-solid fa-database"></i> SQL & Data Modeling</div>
+                    <div class="badge"><i class="fa-solid fa-brain"></i> Applied Machine Learning</div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div id="portfolio">
-        <div class="container">
-            <h1 class="Sub-title">My Work</h1>
-            <div class="work-list">
-                <div class="work">
-                    <img src="Images/Amazon Prime Videos.jpg" alt="Amazon Prime EDA Project">
-                    <div class="layer">
-                        <h3>Amazon Prime Video Content Strategy Analysis (EDA)</h3>
-                        <p>Exploratory Data Analysis & Business Intelligence<br><span>Tech Stack: Python, Pandas, Matplotlib, Seaborn, Plotly, Streamlit.</span><br>Executed a comprehensive EDA on a dataset of 9,800+ titles to engineer data-driven content strategies.</p>
-                        <a href="https://saizan-amazon-eda.streamlit.app/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+    <!-- Projects Section -->
+    <section id="projects">
+        <h2 class="section-title">Selected Projects</h2>
+        <p class="section-subtitle">A selection of analytical projects, machine-learning models, and data-driven applications.</p>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="card-header">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <div class="project-actions">
+                        <a href="https://saizan-amazon-eda.streamlit.app/" target="_blank" rel="noopener noreferrer" aria-label="Open Amazon Prime analysis app" title="Open analysis app"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="https://drive.google.com/file/d/1S8fjShuyPUx31IJWnGhICxwIUfIBfvaP/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Open Amazon Prime dashboard" title="Open dashboard"><i class="fa-solid fa-chart-column"></i></a>
                     </div>
                 </div>
-                <div class="work">
-                    <img src="Images/SuperStore.jpg" alt="Superstore Sales EDA Project">
-                    <div class="layer">
-                        <h3>SuperStore Sales Data Analysis (EDA)</h3>
-                        <p>Data Analysis & Business Intelligence<br><span>Tech Stack: Python, Pandas, Data Visualization, Streamlit.</span><br>Conducted comprehensive Exploratory Data Analysis (EDA) on retail data to identify profit-driving trends and operational bottlenecks.</p>
-                        <a href="https://superstoredashboardsaizan.streamlit.app/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    </div>
+                <h3>Amazon Prime Video Content Analysis</h3>
+                <p>Analyzed more than 9,800 titles to identify catalog, rating, and genre trends that can inform content strategy.</p>
+                <div class="tech-stack">
+                    <span>Python</span><span>Pandas</span><span>Streamlit</span>
                 </div>
-                <div class="work">
-                    <img src="Images/MathMind-LLM.jpg" alt="MathMind-LLM">
-                    <div class="layer">
-                        <h3>MathMind-LLM Project</h3>
-                        <p>Solving Complex Mathematical Equations and Step by Step Explanation by LLM.<br><span>Tech Stack: Python, Large Language Models (LLMs), Streamlit. </span><br>Architected and developed an end-to-end AI application focused on mathematical problem-solving.</p>
-                        <a href="https://mathmind-llm-saizan.streamlit.app/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-                    </div>
+            </div>
+            <div class="project-card">
+                <div class="card-header">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <a href="https://superstoredashboardsaizan.streamlit.app/" target="_blank" rel="noopener noreferrer" aria-label="Open SuperStore Sales analysis"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                 </div>
-                <div class="work">
-                    <img src="Images/Credit Card ML Model.jpg" alt="Credit Card Fraud Detection Project">
-                    <div class="layer">
-                        <h3>Credit-Card Fraud Detection Using ML</h3>
-                        <p>Machine Learning & Financial Anomaly Detection<br><span>Tech Stack: Python, Pandas, Scikit-learn, NumPy, Matplotlib, Seaborn</span><br>Developed a robust fraud detection system designed to identify and flag illicit credit card transactions.</p>
-                        <a href="https://colab.research.google.com/drive/19C9tscZoG8PzeF3m74dm_HCkefh8ad6W?usp=sharing" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                <h3>Superstore Sales Analysis</h3>
+                <p>Examined retail sales and profitability to surface key business trends and operational opportunities.</p>
+                <div class="tech-stack">
+                    <span>Python</span><span>Data Analysis</span><span>Streamlit</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="card-header">
+                    <i class="fa-solid fa-brain"></i>
+                    <a href="https://mathmind-llm-saizan.streamlit.app/" target="_blank" rel="noopener noreferrer" aria-label="Open MathMind-LLM"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+                <h3>MathMind-LLM</h3>
+                <p>A Streamlit application that applies large language models to mathematical problem solving, with step-by-step explanations.</p>
+                <div class="tech-stack">
+                    <span>Python</span><span>LLMs</span><span>Streamlit</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="card-header">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <a href="https://colab.research.google.com/drive/19C9tscZoG8PzeF3m74dm_HCkefh8ad6W?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="Open Credit Card Fraud Detection notebook"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+                <h3>Credit Card Fraud Detection</h3>
+                <p>Developed a logistic regression model to identify potentially fraudulent card transactions.</p>
+                <div class="tech-stack">
+                    <span>Python</span><span>Logistic Regression</span><span>Scikit-learn</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="card-header">
+                    <i class="fa-solid fa-database"></i>
+                    <a href="https://docs.google.com/document/d/1DhT1ISTj83wis2h2lOyjCyByNQ6ys4__Pccrwj6baxY/edit?usp=drive_link" target="_blank" rel="noopener noreferrer" aria-label="Open Zomato database design"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+                <h3>Zomato Data Architecture</h3>
+                <p>Designed a normalized relational schema for restaurant, user, and order-management workflows.</p>
+                <div class="tech-stack">
+                    <span>SQL</span><span>Data Modeling</span><span>ER Diagrams</span>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="card-header">
+                    <i class="fa-solid fa-code"></i>
+                    <a href="https://colab.research.google.com/drive/1ER4MqBsWbcbjW7j68JXuzEjdgN6ISp29" target="_blank" rel="noopener noreferrer" aria-label="Open CodeStorm challenge notebook"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+                <h3>CodeStorm Algorithm Challenge</h3>
+                <p>Solved more than 30 algorithmic challenges in Python, emphasizing efficient logic and data structures.</p>
+                <div class="tech-stack">
+                    <span>Python</span><span>Algorithms</span><span>Data Structures</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience, Education & Skills -->
+    <section id="experience">
+        <h2 class="section-title">Experience & Education</h2>
+        <div class="split-container">
+            <div class="timeline">
+                <h3 class="timeline-heading">Training & Certifications</h3>
+                <div class="timeline-item">
+                    <h4>Data Science Certification</h4>
+                    <h5>AlmaBetter | 2025 - Present</h5>
+                    <p>Specialization in machine learning and analytics.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Career Essentials in Data Analysis</h4>
+                    <h5>Microsoft & LinkedIn | 2024 - 2025</h5>
+                    <p>Professional development in data analysis.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Cybersecurity Basics</h4>
+                    <h5>Cisco Networking Academy | 2024</h5>
+                    <p>Foundational cybersecurity certification.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>AWS & Linux Training</h4>
+                    <h5>Agis I-NET, Jabalpur | 2023</h5>
+                    <p>Training in AWS and Linux fundamentals.</p>
+                </div>
+
+            </div>
+
+            <div class="timeline">
+                <h3 class="timeline-heading">Education</h3>
+                <div class="timeline-item">
+                    <h4>B.Tech in Artificial Intelligence & Data Science</h4>
+                    <h5>2021 - 2025</h5>
+                    <p>Shri Ram Group of Institutions (RGPV), Jabalpur.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Higher Secondary (Class XII)</h4>
+                    <h5>2020 - 2021</h5>
+                    <p>Adarsh Ganga Hr. Sec. School, Singrauli.</p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Secondary Education (Class X)</h4>
+                    <h5>2018 - 2019</h5>
+                    <p>Adarsh Ganga Hr. Sec. School, Singrauli.</p>
+                </div>
+            </div>
+
+            <div class="skills">
+                <div class="skill-category">
+                    <h3 class="timeline-heading">Core Skills</h3>
+                    <div class="tech-stack skill-tags">
+                        <span>Python</span>
+                        <span>SQL</span>
+                        <span>Pandas</span>
+                        <span>Matplotlib</span>
+                        <span>Seaborn</span>
+                        <span>Scikit-learn</span>
+                        <span>Data Analytics</span>
+                        <span>Data Visualization</span>
+                        <span>Streamlit</span>
+                        <span>Database Normalization</span>
+                        <span>Large Language Models</span>
+                        <span>Algorithms & Data Structures</span>
                     </div>
                 </div>
             </div>
-            <a href="see_more.html" class="btn">See More</a>
         </div>
-    </div>
+    </section>
 
-    <div id="contact">
-        <div class="container">
-            <div class="row">
-                <div class="contact-left">
-                    <h1 class="Sub-title">Contact Me</h1>
-                    <p><a href="mailto:saizanans317@gmail.com"><i class="fa-solid fa-paper-plane"></i></a>saizanans317@gmail.com</p>
-                    <div class="social-icon">
-                        <a href="https://www.linkedin.com/in/saizan-ansari/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://github.com/MoSaizanCoder" target="_blank"><i class="fa-brands fa-github"></i></a>
-                    </div>
-                    <div class="resume-dropdown" id="resumeDropdown">
-                    <button type="button" class="btn btn2 dropdown-toggle" id="dropdownToggle" aria-expanded="false">
-                        Download Resume <span class="arrow">&#9662;</span>
-                    </button>
-                    <div class="dropdown-menu" id="dropdownMenu">
-                        <a href="Images/Saizan_Resume.pdf" download="Saizan_Resume.pdf">Data Analytics Resume</a>
-                        <a href="Images/Saizan_Resume_ML.pdf" download="Saizan_Resume_ML.pdf">AI & ML Resume</a>
-                        <a href="Images/Saizan_Resume_NLP.pdf" download="Saizan_Resume_NLP.pdf">Data Science Resume</a>
-                        <a href="Images/Saizan_Resume_Python.pdf" download="Saizan_Resume_Python.pdf">Python Developer Resume</a>
-                    </div>
-                    </div>   
-                </div>
-                <div class="contact-right">
-                    <form name="submit-to-google-sheet">
-                        <input type="text" name="Name" placeholder="Your Name" required>
-                        <input type="email" name="Email" placeholder="Your Email" required>
-                        <textarea name="Message" rows="6" placeholder="Your Message" required></textarea>
-                        <button type="submit" class="btn btn2">Submit</button>
-                    </form>
-                    <span id="msg"></span>
-                </div>
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-container">
+            <form action="https://script.google.com/macros/s/AKfycby2YNw6KEAS5P_SVnOGablebLk66v8gKYntdHuDx2IiUv0NO9Lg8z0GF7Im6YkATdyp/exec" method="POST" class="contact-form">
+                <input type="text" name="Name" placeholder="Full name" autocomplete="name" required>
+                <input type="email" name="Email" placeholder="Email address" autocomplete="email" required>
+                <textarea name="Message" rows="5" placeholder="How can I help you?" required></textarea>
+                <button type="submit" class="btn">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+                <p class="form-status" id="contact-status" role="status" aria-live="polite"></p>
+            </form>
+            <div class="social-links">
+                <a href="mailto:saizanans317@gmail.com" class="social-card"><i class="fa-solid fa-envelope"></i><span class="social-card-label email-label">saizanans317@gmail.com</span></a>
+                <a href="https://github.com/MoSaizanCoder" class="social-card" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub Profile</a>
+                <a href="https://www.linkedin.com/in/saizan-ansari/" class="social-card" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn Profile</a>
             </div>
         </div>
-        <div class="copyright">
-            <p>Copyright © Mohammad Saizan Ansari</p>
-        </div>
-    </div>
+    </section>
 
-    <script src="script.js"></script>
 </body>
 </html>
